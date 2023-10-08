@@ -33,18 +33,19 @@ pub fn main() !void {
     var loc_buf = [_]u8{0} ** std.fs.MAX_PATH_BYTES;
     const location = try std.fs.selfExeDirPath(&loc_buf);
 
-    const option = try args.parse(location);
+    var general_allocator = std.heap.GeneralPurposeAllocator(.{}){};
+    allocator = switch (comptime builtin.mode) {
+        .ReleaseFast => std.heap.raw_c_allocator,
+        else => general_allocator.allocator(),
+    };
+    defer _ = general_allocator.deinit();
+
+    const option = try args.parse(location, allocator);
+    defer args.args.deinit();
 
     const logger = std.log.scoped(.main);
     logfile = try std.fs.createFileAbsolute("/tmp/seamstress.log", .{});
     defer logfile.close();
-
-    var general_allocator = std.heap.GeneralPurposeAllocator(.{}){};
-    allocator = switch (comptime builtin.mode) {
-        .ReleaseFast => std.heap.c_allocator,
-        else => general_allocator.allocator(),
-    };
-    defer _ = general_allocator.deinit();
 
     if (option) |opt| try create.init(opt, allocator, location);
     defer if (option) |_| create.deinit();
