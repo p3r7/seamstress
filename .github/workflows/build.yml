@@ -71,6 +71,37 @@ jobs:
           name: macos-x86_64-${{ github.ref_name }}
           path: |
             ./*.zip
+  windows:
+    runs-on: windows-latest
+    strategy:
+        matrix:
+          include:
+            - { sys: mingw64, env: x86_64 }
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: ${{matrix.sys}}
+          install: >-
+            curl
+            # git
+            mingw-w64-${{matrix.env}}-pkg-config
+            mingw-w64-${{matrix.env}}-dlfcn
+            mingw-w64-${{matrix.env}}-liblo
+            mingw-w64-${{matrix.env}}-rtmidi
+            mingw-w64-${{matrix.env}}-SDL2
+            mingw-w64-${{matrix.env}}-SDL2_ttf
+            mingw-w64-${{matrix.env}}-SDL2_image
+            mingw-w64-${{matrix.env}}-readline
+            mingw-w64-${{matrix.env}}-winpthreads-git
+      - uses: actions/checkout@v3
+      - name: install zig
+        run: |
+          curl https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
+
   release:
     runs-on: ubuntu-latest
     needs: [macos-x86_64,linux-x86_64]
