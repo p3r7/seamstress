@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ls -l /
+df
 exit 0
 
 # install zig
