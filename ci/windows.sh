@@ -13,5 +13,4 @@ cp -R zig-windows-x86_64-0.11.0/* /opt/zig
 ln -s /mingw64/bin/liblo-7.dll /mingw64/bin/lo.dll
 
 # build
-ls /opt/zig/
-# /opt/zig/zig build -Doptimize=ReleaseFast -Dcpu=x86_64 --summary all
+/opt/zig/zig.exe build -Doptimize=ReleaseFast -Dcpu=x86_64 --summary all
