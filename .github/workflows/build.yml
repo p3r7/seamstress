@@ -86,7 +86,7 @@ jobs:
           update: true
           msystem: ${{matrix.sys}}
           install: >-
-            curl
+            wget
             mingw-w64-${{matrix.env}}-pkg-config
             mingw-w64-${{matrix.env}}-dlfcn
             mingw-w64-${{matrix.env}}-liblo
@@ -97,9 +97,12 @@ jobs:
             mingw-w64-${{matrix.env}}-readline
             mingw-w64-${{matrix.env}}-winpthreads-git
       - uses: actions/checkout@v3
-      - name: install zig
+      # - name: download zig
+      #   run: |
+      #     wget https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
+      - name: build seamstress
         run: |
-          curl https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
+          bash ci/windows.sh
 
   release:
     runs-on: ubuntu-latest
