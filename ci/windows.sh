@@ -1,6 +1,6 @@
 #!/bin/bash
 
-which wget
+ls -l /
 exit 0
 
 # install zig
