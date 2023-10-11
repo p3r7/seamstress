@@ -101,6 +101,9 @@ jobs:
       # - name: download zig
       #   run: |
       #     wget https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
+      - shell: cmd
+        run: |
+          MKlink /D C:\msys64 D:\a\_temp\msys64
       - name: build seamstress
         run: |
           bash ci/windows.sh

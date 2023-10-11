@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ln -sfn / /c/msys64
+set -e
 
 # fix liblo missing alias
 ln -s /mingw64/bin/liblo-7.dll /mingw64/bin/lo.dll
