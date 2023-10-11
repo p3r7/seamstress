@@ -1,4 +1,5 @@
 const std = @import("std");
+const builtin = @import("builtin");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -31,13 +32,40 @@ pub fn build(b: *std.Build) void {
     b.getInstallStep().dependOn(&install_lua_files.step);
     b.getInstallStep().dependOn(&install_examples.step);
 
-    const zig_sdl = b.dependency("SDL", .{
-        .target = target,
-        .optimize = optimize,
-    });
-    exe.linkLibrary(zig_sdl.artifact("SDL2"));
-    exe.linkLibrary(zig_sdl.artifact("SDL2_ttf"));
-    exe.linkLibrary(zig_sdl.artifact("SDL_image"));
+    if (builtin.os.tag == .windows) {
+        exe.addIncludePath(std.Build.LazyPath{ .path = "c:/msys64/mingw64/include" });
+        exe.addLibraryPath(std.Build.LazyPath{ .path = "c:/msys64/mingw64/bin" });
+        exe.addLibraryPath(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib" });
+        // exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/bin/SDL2.dll" });
+    }
+
+    if (builtin.os.tag == .windows) {
+        exe.linkSystemLibrary("SDL2");
+        exe.linkSystemLibrary("SDL2_ttf");
+        exe.linkSystemLibrary("SDL_image");
+        // exe.linkSystemLibrary("libSDL_image-1-2-0");
+
+        exe.linkSystemLibrary("jpeg");
+        exe.linkSystemLibrary("png");
+        exe.linkSystemLibrary("tiff");
+        exe.linkSystemLibrary("Lerc");
+        exe.linkSystemLibrary("webp");
+
+        exe.linkSystemLibrary("zlib");
+        exe.linkSystemLibrary("deflate");
+        exe.linkSystemLibrary("jbig");
+        exe.linkSystemLibrary("sharpyuv");
+        exe.linkSystemLibrary("zstd");
+        exe.linkSystemLibrary("lzma");
+    } else {
+        const zig_sdl = b.dependency("SDL", .{
+            .target = target,
+            .optimize = optimize,
+        });
+        exe.linkLibrary(zig_sdl.artifact("SDL2"));
+        exe.linkLibrary(zig_sdl.artifact("SDL2_ttf"));
+        exe.linkLibrary(zig_sdl.artifact("SDL2_image"));
+    }
 
     const zig_lua = b.dependency("Lua", .{
         .target = target,
@@ -52,30 +80,48 @@ pub fn build(b: *std.Build) void {
     });
     exe.linkLibrary(zig_link.artifact("abl_link"));
 
-    const zig_readline = b.dependency("readline", .{
-        .target = target,
-        .optimize = optimize,
-    });
-    exe.linkLibrary(zig_readline.artifact("readline"));
-    exe.linkSystemLibrary("ncurses");
+    if (builtin.os.tag == .windows) {
+        exe.linkSystemLibrary("readline");
+        // exe.linkSystemLibrary("pdcurses");
+        exe.linkSystemLibrary("termcap");
+    } else {
+        const zig_readline = b.dependency("readline", .{
+            .target = target,
+            .optimize = optimize,
+        });
+        exe.linkLibrary(zig_readline.artifact("readline"));
+        exe.linkSystemLibrary("ncurses");
+    }
 
-    const zig_liblo = b.dependency("liblo", .{
-        .target = target,
-        .optimize = optimize,
-    });
-    exe.linkLibrary(zig_liblo.artifact("liblo"));
+    if (builtin.os.tag == .windows) {
+        // exe.linkSystemLibrary("liblo");
+        exe.linkSystemLibrary("lo");
+        // exe.linkSystemLibrary("liblo-7");
+    } else {
+        const zig_liblo = b.dependency("liblo", .{
+            .target = target,
+            .optimize = optimize,
+        });
+        exe.linkLibrary(zig_liblo.artifact("liblo"));
+    }
 
-    const zig_rtmidi = b.dependency("rtmidi", .{
-        .target = target,
-        .optimize = optimize,
-    });
-    exe.linkLibrary(zig_rtmidi.artifact("rtmidi"));
+    if (builtin.os.tag == .windows) {
+        exe.linkSystemLibrary("rtmidi");
+        // exe.linkSystemLibrary("librtmidi-6");
+    } else {
+        const zig_rtmidi = b.dependency("rtmidi", .{
+            .target = target,
+            .optimize = optimize,
+        });
+        exe.linkLibrary(zig_rtmidi.artifact("rtmidi"));
+    }
 
     const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);
     }
+
     const run_step = b.step("run", "Run the app");
     run_step.dependOn(&run_cmd.step);
     const unit_tests = b.addTest(.{
