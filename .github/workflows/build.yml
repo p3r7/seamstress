@@ -87,7 +87,6 @@ jobs:
           msystem: ${{matrix.sys}}
           install: >-
             curl
-            # git
             mingw-w64-${{matrix.env}}-pkg-config
             mingw-w64-${{matrix.env}}-dlfcn
             mingw-w64-${{matrix.env}}-liblo
