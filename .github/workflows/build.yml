@@ -81,6 +81,9 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
+      - shell: cmd
+        run: |
+          ls C:\msys64\
       - uses: msys2/setup-msys2@v2
         with:
           update: true
@@ -97,9 +100,6 @@ jobs:
             mingw-w64-${{matrix.env}}-SDL2_image
             mingw-w64-${{matrix.env}}-readline
             mingw-w64-${{matrix.env}}-winpthreads-git
-      - shell: cmd
-        run: |
-          ls C:\msys64\
         # MKlink /D C:\msys64 D:\a\_temp\msys64
 
       - uses: actions/checkout@v3
