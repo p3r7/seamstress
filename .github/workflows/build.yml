@@ -87,6 +87,7 @@ jobs:
           msystem: ${{matrix.sys}}
           install: >-
             wget
+            unzip
             mingw-w64-${{matrix.env}}-pkg-config
             mingw-w64-${{matrix.env}}-dlfcn
             mingw-w64-${{matrix.env}}-liblo
