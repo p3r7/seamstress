@@ -5,7 +5,7 @@ mkdir /opt
 
 # install zig
 mkdir /opt/zig
-wget https://ziglang.org/builds/zig-linux-x86_64-0.11.0.tar.xz
+wget https://ziglang.org/builds/zig-linux-x86_64-0.11.0.tar.xz 1> /dev/null
 tar -xf zig-linux-x86_64-0.11.0.tar.xz -C /tmp
 cp -R /tmp/zig-linux-x86_64-0.11.0/* /opt/zig
 
