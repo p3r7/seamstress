@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mkdir /tmp
-mkdir /opt
+which wget
+exit 0
 
 # install zig
 mkdir /opt/zig
