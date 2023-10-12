@@ -79,8 +79,14 @@ jobs:
             - { sys: mingw64, env: x86_64 }
     defaults:
       run:
-        shell: msys2 {0}
+        shell: C:\msys64\msys2.exe {0}
     steps:
+      - name: update msys2 packages
+        run: |
+          pacman -Suy
+      - name: install bash
+        run: |
+          pacman -S bash
       - shell: cmd
         run: |
           ls C:\msys64\mingw64\bin\
