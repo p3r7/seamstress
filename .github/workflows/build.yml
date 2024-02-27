@@ -102,8 +102,7 @@ jobs:
         run: |
           pacman --noconfirm -S wget
           pacman --noconfirm -S unzip
-          pacman --noconfirm -S mingw-w64-${{matrix.env}}-pkg-config
-          pacman --noconfirm -S mingw-w64-${{matrix.env}}-headers
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-toolchain
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-dlfcn
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-liblo
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-rtmidi
@@ -111,7 +110,6 @@ jobs:
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_ttf
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_image
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-readline
-          pacman --noconfirm -S mingw-w64-${{matrix.env}}-winpthreads-git
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-freetype
           ln -s /mingw64/bin/liblo-7.dll /mingw64/bin/lo.dll
 
