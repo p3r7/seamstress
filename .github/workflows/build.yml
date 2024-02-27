@@ -123,6 +123,7 @@ jobs:
       - name: ls
         run: |
           ls -l
+          pwd
    
       # - uses: msys2/setup-msys2@v2
       #   with:
