@@ -103,6 +103,7 @@ jobs:
           pacman --noconfirm -S wget
           pacman --noconfirm -S unzip
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-pkg-config
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-headers
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-dlfcn
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-liblo
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-rtmidi
