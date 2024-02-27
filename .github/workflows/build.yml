@@ -112,7 +112,7 @@ jobs:
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-readline
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-winpthreads-git
           ln -s /mingw64/bin/liblo-7.dll /mingw64/bin/lo.dll
-          
+
       - uses: actions/checkout@v2
 
       - name: download zig
@@ -120,7 +120,8 @@ jobs:
           wget --no-verbose https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
           unzip -q zig-windows-${{matrix.env}}-0.11.0.zip
           pwd
-      
+          ls -l
+
       # - uses: msys2/setup-msys2@v2
       #   with:
       #     update: true
