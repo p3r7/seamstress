@@ -98,16 +98,20 @@ jobs:
       #- name: update msys2 packages
       #  run: |
       #    pacman --noconfirm -Suy
-      - name: install bash
+      - name: install build deps
         run: |
-          pacman --noconfirm -S bash
-      - name: which gcc
-        run: |
-          gcc --version
-      - name: ls bin
-        run: |
-          ls -l C:/msys64/usr/
-          ls -l C:/msys64/mingw64/
+          pacman --noconfirm -S wget
+          pacman --noconfirm -S unzip
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-pkg-config
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-dlfcn
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-liblo
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-rtmidi
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_ttf
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_image
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-readline
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-winpthreads-git
+   
       # - uses: msys2/setup-msys2@v2
       #   with:
       #     update: true
