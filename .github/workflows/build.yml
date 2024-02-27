@@ -95,9 +95,11 @@ jobs:
           echo "C:/msys64/bin" >> $GITHUB_PATH
           echo "C:/msys64/usr/bin" >> $GITHUB_PATH
           echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
-      - name: update msys2 packages
-        run: |
-          pacman --noconfirm -Suy
+      ## NB: disabling as closes the TTY when upgrading MinTTY...
+      ##     only happens when using bash and not powershell
+      #- name: update msys2 packages
+      #  run: |
+      #    pacman --noconfirm -Suy
       - name: install bash
         run: |
           pacman --noconfirm -S bash
