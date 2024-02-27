@@ -92,7 +92,9 @@ jobs:
           ## - bash w/ `msys2/setup-msys2@v2`
           #run: echo "D:/a/_temp/msys64/mingw64/bin" >> $GITHUB_PATH
           ## - bash w/ default msys2 env
-          echo "C:/msys64/bin:C:/msys64/usr/bin:C:/msys64/mingw64/bin" >> $GITHUB_PATH
+          echo "C:/msys64/bin" >> $GITHUB_PATH
+          echo "C:/msys64/usr/bin" >> $GITHUB_PATH
+          echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
       - name: update msys2 packages
         run: |
           pacman --noconfirm -Suy
