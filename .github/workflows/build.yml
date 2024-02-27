@@ -124,7 +124,9 @@ jobs:
 
       - name: build
         run: |
-          /d/a/seamstress/seamstress/zig-windows-x86_64-0.11.0/zig build -Dtarget=x86_64-windows-gnu -freference-trace
+          ls -l c/msys64/mingw64/include
+          ls -l c/msys64/mingw64/lib
+          # /d/a/seamstress/seamstress/zig-windows-x86_64-0.11.0/zig build -Dtarget=x86_64-windows-gnu -freference-trace
 
       # - uses: msys2/setup-msys2@v2
       #   with:
