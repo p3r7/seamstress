@@ -115,9 +115,9 @@ jobs:
           
       - name: download zig
         run: |
-          wget https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
-          unzip zig-windows-${{matrix.env}}-0.11.0.zip
-          ls
+          wget --no-verbose https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
+          unzip -q zig-windows-${{matrix.env}}-0.11.0.zip
+          ls zig-windows-${{matrix.env}}-0.11.0
    
       # - uses: msys2/setup-msys2@v2
       #   with:
