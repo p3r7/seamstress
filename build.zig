@@ -40,6 +40,7 @@ pub fn build(b: *std.Build) void {
     }
 
     if (builtin.os.tag == .windows) {
+        exe.linkSystemLibrary("c");
         exe.linkSystemLibrary("ostream");
         exe.linkSystemLibrary("iphlpapi");
         exe.linkSystemLibrary("setupapi");
