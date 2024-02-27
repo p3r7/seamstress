@@ -42,7 +42,7 @@ pub fn build(b: *std.Build) void {
     if (builtin.os.tag == .windows) {
         exe.linkSystemLibrary("SDL2");
         exe.linkSystemLibrary("SDL2_ttf");
-        exe.linkSystemLibrary("SDL_image");
+        exe.linkSystemLibrary("SDL2_image");
         // exe.linkSystemLibrary("libSDL_image-1-2-0");
 
         exe.linkSystemLibrary("jpeg");
