@@ -110,7 +110,7 @@ jobs:
         run: |
           ls -l C:/msys64/bin/
           ls -l C:/msys64/usr/bin/
-          ls -l C:/msys64/mingw64/bin/
+          ls -l C:/msys64/
       # - uses: msys2/setup-msys2@v2
       #   with:
       #     update: true
