@@ -111,6 +111,9 @@ jobs:
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_image
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-readline
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-winpthreads-git
+      - name: download zig
+        run: |
+          wget https://ziglang.org/download/0.11.0/zig-windows-${{matrix.env}}-0.11.0.zip
    
       # - uses: msys2/setup-msys2@v2
       #   with:
