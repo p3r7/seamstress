@@ -111,6 +111,7 @@ jobs:
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-SDL2_image
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-readline
           pacman --noconfirm -S mingw-w64-${{matrix.env}}-winpthreads-git
+          pacman --noconfirm -S mingw-w64-${{matrix.env}}-freetype
           ln -s /mingw64/bin/liblo-7.dll /mingw64/bin/lo.dll
 
       - uses: actions/checkout@v2
