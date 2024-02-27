@@ -40,6 +40,11 @@ pub fn build(b: *std.Build) void {
     }
 
     if (builtin.os.tag == .windows) {
+        exe.linkSystemLibrary("string");
+        exe.linkSystemLibrary("ostream");
+        exe.linkSystemLibrary("iphlpapi");
+        exe.linkSystemLibrary("setupapi");
+
         exe.linkSystemLibrary("SDL2");
         exe.linkSystemLibrary("SDL2_ttf");
         exe.linkSystemLibrary("SDL2_image");
