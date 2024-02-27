@@ -86,13 +86,11 @@ jobs:
       - name: Put MSYS2_MinGW64 on PATH
         run: |
           ## - powershell
-          # echo "C:\msys64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           # echo "C:\msys64\usr\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           # echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           ## - bash w/ `msys2/setup-msys2@v2`
           #run: echo "D:/a/_temp/msys64/mingw64/bin" >> $GITHUB_PATH
           ## - bash w/ default msys2 env
-          echo "C:/msys64/bin" >> $GITHUB_PATH
           echo "C:/msys64/usr/bin" >> $GITHUB_PATH
           echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
       ## NB: disabling as closes the TTY when upgrading MinTTY...
@@ -108,7 +106,8 @@ jobs:
           gcc --version
       - name: ls bin
         run: |
-          ls -l C:/msys64/
+          ls -l C:/msys64/usr/
+          ls -l C:/msys64/mingw64/
       # - uses: msys2/setup-msys2@v2
       #   with:
       #     update: true
