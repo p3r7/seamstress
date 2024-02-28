@@ -40,20 +40,21 @@ pub fn build(b: *std.Build) void {
     }
 
     if (builtin.os.tag == .windows) {
-        exe.linkSystemLibrary("c");
+        exe.linkLibC();
+        // exe.linkSystemLibrary("c");
+
         // exe.linkSystemLibrary("ostream");
         // exe.linkSystemLibrary("iphlpapi");
         // exe.linkSystemLibrary("setupapi");
 
         // NB: might be better to statically link
         // see https://github.com/ziglang/zig/issues/7799#issuecomment-856352102
-        exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2.a" });
-        exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2_ttf.a" });
-        exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2_image.a" });
-        // exe.linkSystemLibrary("SDL2");
-        // exe.linkSystemLibrary("SDL2_ttf");
-        // exe.linkSystemLibrary("SDL2_image");
-        // exe.linkSystemLibrary("libSDL_image-1-2-0");
+        // exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2.a" });
+        // exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2_ttf.a" });
+        // exe.addObjectFile(std.Build.LazyPath{ .path = "c:/msys64/mingw64/lib/libSDL2_image.a" });
+        exe.linkSystemLibrary("SDL2");
+        exe.linkSystemLibrary("SDL2_ttf");
+        exe.linkSystemLibrary("SDL2_image");
 
         exe.linkSystemLibrary("jpeg");
         exe.linkSystemLibrary("png");
