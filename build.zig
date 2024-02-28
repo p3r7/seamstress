@@ -41,9 +41,9 @@ pub fn build(b: *std.Build) void {
 
     if (builtin.os.tag == .windows) {
         exe.linkSystemLibrary("c");
-        exe.linkSystemLibrary("ostream");
-        exe.linkSystemLibrary("iphlpapi");
-        exe.linkSystemLibrary("setupapi");
+        // exe.linkSystemLibrary("ostream");
+        // exe.linkSystemLibrary("iphlpapi");
+        // exe.linkSystemLibrary("setupapi");
 
         // NB: might be better to statically link
         // see https://github.com/ziglang/zig/issues/7799#issuecomment-856352102
