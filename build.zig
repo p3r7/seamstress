@@ -45,9 +45,14 @@ pub fn build(b: *std.Build) void {
         exe.linkSystemLibrary("iphlpapi");
         exe.linkSystemLibrary("setupapi");
 
-        exe.linkSystemLibrary("SDL2");
-        exe.linkSystemLibrary("SDL2_ttf");
-        exe.linkSystemLibrary("SDL2_image");
+        // NB: might be better to statically link
+        // see https://github.com/ziglang/zig/issues/7799#issuecomment-856352102
+        exe.addObjectFile("libSDL2.a");
+        exe.addObjectFile("libSDL2_ttf.a");
+        exe.addObjectFile("libSDL2_image.a");
+        // exe.linkSystemLibrary("SDL2");
+        // exe.linkSystemLibrary("SDL2_ttf");
+        // exe.linkSystemLibrary("SDL2_image");
         // exe.linkSystemLibrary("libSDL_image-1-2-0");
 
         exe.linkSystemLibrary("jpeg");
