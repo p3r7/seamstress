@@ -47,9 +47,9 @@ pub fn build(b: *std.Build) void {
 
         // NB: might be better to statically link
         // see https://github.com/ziglang/zig/issues/7799#issuecomment-856352102
-        exe.addObjectFile("libSDL2.a");
-        exe.addObjectFile("libSDL2_ttf.a");
-        exe.addObjectFile("libSDL2_image.a");
+        exe.addObjectFile(std.Build.LazyPath{ .path = "libSDL2.a" });
+        exe.addObjectFile(std.Build.LazyPath{ .path = "libSDL2_ttf.a" });
+        exe.addObjectFile(std.Build.LazyPath{ .path = "libSDL2_image.a" });
         // exe.linkSystemLibrary("SDL2");
         // exe.linkSystemLibrary("SDL2_ttf");
         // exe.linkSystemLibrary("SDL2_image");
